@@ -1,10 +1,16 @@
+from django.shortcuts import get_object_or_404
+
+from rest_framework.views import APIView
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
-
+from rest_framework import status
+from rest_framework import generics
 
 from libros.serializers import (
     AutorSerializer,
+    LibroConAutorFullSerializer,
+    LibroConAutorlOutSerializer,
     LibroConAutorSerializer,
     LibroSerializer
 
@@ -29,3 +35,9 @@ class LibroViewSet(viewsets.ModelViewSet):
         libro = self.get_object()
         serializer = LibroConAutorSerializer(libro)
         return Response(serializer.data)
+
+
+# Herencia multiple para poder utilizar un router
+class AutorListViewSet(viewsets.ViewSetMixin, generics.ListAPIView):
+    queryset = Autor.objects.all()
+    serializer_class = AutorSerializer
