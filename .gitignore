@@ -1,3 +1,5 @@
+*.sqliite3
+
 ### Mac OS X ###
 .DS_Store
 .AppleDouble
